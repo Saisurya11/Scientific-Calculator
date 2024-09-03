@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calci</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Libre+Baskerville:wght@700&family=Lobster&family=Rubik+Broken+Fax&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(0, 0, 0);
+        }
+
+        * {
+            border-radius: 10px;
+            font-family: 'Agbalumo', system-ui;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .calci {
+            display: grid;
+            grid-template-columns: repeat(4, 50px);
+            grid-template-rows: repeat(6, 50px);
+            gap: 20px;
+            border: 2px solid rgb(5, 5, 5);
+            /* align-items: center; */
+            justify-content: center;
+            background-color: rgb(0, 0, 0);
+            padding: 10px;box-shadow: 0px 0px 9px 0px white;
+        }
+
+        .inputs {
+            display: flex;
+            /* border: 2px solid gray; */
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bolder;
+            box-shadow: 0px 0px 12px 0px white;
+        }
+
+        .inputs:first-child {
+            border-radius: 10px;
+            grid-column-start: 1;
+            grid-column-end: 5;
+            text-align: left;
+            font-size: 30px;
+            margin: 10px 5px;
+            padding: 20px;
+            cursor: auto;
+            box-shadow: none;
+        }
+
+        .inputs:nth-child(4) {
+            background-color: black;
+            color: white;
+        }
+
+        .inputs:nth-child(4):active {
+            background-color: rgba(255, 0, 0, 0.877);
+            color: black;
+        }
+
+        button:active {
+            background-color: black;
+            color: white;
+        }
+
+        #left,
+        #right {
+            opacity: 0;
+            transition-duration: 1.5s;
+        }
+
+        h1 {
+            position: relative;
+            filter: invert(100%);
+            font-size: 50px;
+            
+        }
+
+        .left,
+        .right {
+            border: 2px solid grey;
+        }
+
+        .scentific {
+            display: flex;
+            position: relative;
+            border: 2px solid gray;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            margin: 10px 8px;
+            padding: 5px 10px;
+        }
+        .out{
+            display: inline;
+            box-shadow: 0px 0px 12px 0px white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="out">
+
+        <h1>Scentific Calculator</h1>
+    </div>
+    <div class="main">
+        <div class="left" id="left">
+            <button class="scentific" onclick="scentificfns('sinh')">SINH</button>
+            <button class="scentific" onclick="scentificfns('cosh')">COSH</button>
+            <button class="scentific" onclick="scentificfns('tanh')">TANH</button>
+            <button class="scentific" onclick="scentificfns('coth')">COTH</button>
+            <button class="scentific" onclick="scentificfns('cosech')">COSECH</button>
+            <button class="scentific" onclick="scentificfns('sech')">SECH</button>
+            <button class="scentific" onclick="scentificfns('deg')">DEG</button>
+        </div>
+        <div class="calci">
+            <input type="text" class="inputs" id="display">
+            <button class="inputs" onclick="remove()"> <<
+                </button>
+                    <button class="inputs" onclick="scentific()" id="sceince">sce</button>
+                    <button class="inputs" onclick="delete1()">AC</button>
+                    <button class="inputs" onclick="entering('+')">+</button>
+                    <button class="inputs" onclick="entering(1)">1</button>
+                    <button class="inputs" onclick="entering(2)">2</button>
+                    <button class="inputs" onclick="entering(3)">3</button>
+                    <button class="inputs" onclick="entering('-')">-</button>
+                    <button class="inputs" onclick="entering(4)">4</button>
+                    <button class="inputs" onclick="entering(5)">5</button>
+                    <button class="inputs" onclick="entering(6)">6</button>
+                    <button class="inputs" onclick="entering('*')">*</button>
+                    <button class="inputs" onclick="entering(7)">7</button>
+                    <button class="inputs" onclick="entering(8)">8</button>
+                    <button class="inputs" onclick="entering(9)">9</button>
+                    <button class="inputs" onclick="entering('/')">/</button>
+                    <button class="inputs" onclick="entering(.)">.</button>
+                    <button class="inputs" onclick="entering(0)">0</button>
+                    <button class="inputs" onclick="entering('00')">00</button>
+                    <button class="inputs" onclick="calculate()">=</button>
+        </div>
+        <div class="right" id="right">
+            <button class="scentific" onclick="scentificfns('sin')">SIN</button>
+            <button class="scentific" onclick="scentificfns('cos')">COS</button>
+            <button class="scentific" onclick="scentificfns('tan')">TAN</button>
+            <button class="scentific" onclick="scentificfns('cot')">COT</button>
+            <button class="scentific" onclick="scentificfns('cosec')">COSEC</button>
+            <button class="scentific" onclick="scentificfns('sec')">SEC</button>
+            <button class="scentific" onclick="scentificfns('rad')">RAD</button>
+        </div>
+    </div>
+    <script>
+        function entering(digits) {
+            let display = document.getElementById('display');
+            display.value = display.value + digits;
+        }
+        function remove() {
+            let digits = document.getElementById('display');
+            digits.value = display.value.slice(0, -1);
+        }
+        function delete1() {
+            let display = document.getElementById('display');
+            display.value = "";
+        }
+        function calculate() {
+            let out = document.getElementById('display');
+            out.value = eval(out.value);
+
+        }
+        function scentific() {
+            let left1 = document.getElementById('left');
+            let right1 = document.getElementById('right');
+            let sceince1 = document.getElementById('sceince');
+            if (left1.style.opacity == 0 & right1.style.opacity == 0) {
+                left1.style.opacity = 1;
+                right1.style.opacity = 1;
+                sceince1.style.backgroundColor = 'black';
+                sceince1.style.color = 'white';
+            }
+            else {
+                left1.style.opacity = 0;
+                right1.style.opacity = 0;
+                sceince1.style.backgroundColor = 'white';
+                sceince1.style.color = 'black';
+            }
+        }
+        function scentificfns(fns) {
+            let display = document.getElementById('display');
+            if (fns == 'sin') {
+                display.value = Math.sin(display.value).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'cos') {
+                display.value = Math.cos(display.value).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'tan') {
+                display.value = Math.tan(display.value).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'cot') {
+                display.value = (1 / Math.tan(display.value)).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'cosec') {
+                display.value = (1 / Math.sin(display.value)).toPrecision(5) + 'rad'
+            }
+            else if (fns == 'sec') {
+                display.value = (1 / Math.cos(display.value)).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'sinh') {
+                display.value = Math.sinh(display.value).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'cosh') {
+                display.value = Math.cosh(display.value).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'tanh') {
+                display.value = Math.tanh(display.value).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'cosech') {
+                display.value = (1 / Math.sinh(display.value)).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'sech') {
+                display.value = (1 / Math.cosh(display.value)).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'coth') {
+                display.value = (1 / Math.tanh(display.value)).toPrecision(5) + 'rad';
+            }
+            else if (fns == 'rad') {
+                let inputValue = parseFloat(display.value);
+                if (!isNaN(inputValue)) {
+                    display.value = inputValue * (Math.PI / 180) + 'rad';
+                } else {
+                    // Handle the case when the input is not a valid number
+                    display.value = 'Invalid Input';
+                }
+
+            }
+            else if (fns == 'deg') {
+                let inputValue = parseFloat(display.value);
+                if (!isNaN(inputValue)) {
+                    display.value = inputValue * (180 / Math.PI) + 'deg';
+                } else {
+                    // Handle the case when the input is not a valid number
+                    display.value = 'Invalid Input';
+                }
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
